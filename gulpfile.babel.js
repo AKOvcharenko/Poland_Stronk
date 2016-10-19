@@ -26,7 +26,7 @@ gulp.task('buildJS', () => {
 
 gulp.task('buildCSS', () => {
     gulp.src('./css/parts/*.css')
-        .pipe(concat('portal.css'))
+        .pipe(concat('poland_ball.css'))
         .pipe(gulp.dest('./css'))
 });
 

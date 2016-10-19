@@ -1,0 +1,108 @@
+.post, .post .hover {
+    border: 2px solid #444442;
+}
+
+.post {
+    background-color: #181817;
+    display: inline-block;
+    margin: 4px 2px;
+    position: relative;
+}
+
+
+.post, .post img {
+    width: 180px;
+    height: 180px;
+    line-height: 0;
+}
+
+.post .hover, .post a.image-list-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.post img {
+    outline: #121211 solid 1px;
+    outline-offset: -1px;
+}
+
+
+.post a.image-list-link {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.post .point-info {
+    bottom: -70px;
+}
+
+.post .point-info {
+    background: #000;
+    background: rgba(0,0,0,.7);
+    position: absolute;
+    color: #FFF;
+    height: 70px;
+}
+
+.post .point-info, .post .post-info {
+    width: 100%;
+}
+.transition {
+    transition: all .07s ease-in-out;
+    -webkit-transition: all .07s ease-in-out;
+}
+
+.post .point-info>div {
+    height: 70px;
+}
+.relative {
+    position: relative;
+}
+
+.post .hover {
+    display: none;
+    padding: 7%;
+    width: 120%;
+    z-index: 2;
+    background-color: #121211;
+    top: 101%;
+    margin-left: -19%;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -webkit-box-shadow: 0 2px 5px #000;
+    -moz-box-shadow: 0 2px 5px #000;
+    box-shadow: 0 2px 5px #000;
+    text-align: left;
+}
+.post .hover, .post a.image-list-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.post, .post .hover {
+    border: 2px solid #444442;
+}
+
+.post p {
+    line-height: 1.5em;
+    color: #fff;
+    max-height: 11em;
+    padding: 0;
+    letter-spacing: .03em;
+    margin-bottom: 27px;
+}
+
+
+.post .post-info {
+    background-color: #232323;
+    padding: 7%;
+    position: absolute;
+    width: 87.5%;
+    bottom: 0;
+    left: 0;
+    color: #999;
+    border-top: 1px solid #000;
+}
