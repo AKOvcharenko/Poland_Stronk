@@ -1,0 +1,1 @@
+export default () =>{return {type: "RESET_FEED_DATA"}};

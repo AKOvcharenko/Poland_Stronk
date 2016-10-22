@@ -1,89 +1,47 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
 import fetchData from './../utils/fetchData.js';
 import Loader from './Loader.jsx';
+import ImageIP from './ImageIP.jsx';
+import CommentsIP from './CommentsIP.jsx';
 
-import store from './../store/store.js';
-import gotFeedData from './../actions/actionGotFeedData.js'
 
-
-const mapStateToProps = state => {return {feedState: state.feedState}};
-
-class IGP extends Component {
-
+class IP extends Component {
     constructor(){
         super();
-        this.sent = false;
         this.appID = '6273a7e9fad6e45';
-        this.handleScroll = this.handleScroll.bind(this);
+        this.state = {dataImage: {}, dataComments:[]};
+        this.insertData = this.insertData.bind(this);
         this.makeRequest = this.makeRequest.bind(this);
-
     }
 
-    makeRequest(){
-        var self = this;
-        var feedLength = this.props.feedState.length;
-        if(this.sent){return;}
-        this.sent = true;
-        var url = `https://api.imgur.com/3/gallery/t/polandball/viral/${feedLength ? feedLength%60 : 0}`;
-        fetchData(url, this.appID).then(response => {
-            store.dispatch(gotFeedData(response));
-            self.sent = false;
-        }, err => {self.sent = false;});
-    }
-
-    handleScroll(){
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            this.makeRequest();
-        }
+    insertData(response){
+        var newState;
+        response = JSON.parse(response).data;
+        newState = {dataComments: response}; // case when response for comments
+        if(Object.prototype.toString.call(response) === '[object Object]'){newState = {dataImage: response};}// case when response for image
+        this.setState(newState);
     }
 
     componentWillMount(){
-        this.makeRequest();
+        var imageID = this.props.params.imageId;
+        this.makeRequest(`https://api.imgur.com/3/gallery/${imageID}`);
+        this.makeRequest(`https://api.imgur.com/3/gallery/${imageID}/comments`);
     }
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
-    forEachItem(item, index){
-        return <div key={item.id} id={item.id} className="post" >
-            <Link className="image-list-link" to={`img/${item.id}`}>
-                <img src={`http://i.imgur.com/${item.cover || item.id}b.jpg`}/>
-                <div className="point-info gradient-transparent-black transition">
-                    <div className="relative">
-                        <div className="pa-bottom">
-                            <div className="point-info-points" title="points">
-                                <span className={'points-' + item.id}></span>
-                                <span className={'points-text-'+ item.id}>points</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </Link>
-            <div className="hover">
-                <p>{item.title}</p>
-                <div className="post-info">{`album · ${item.views} views`}</div>
-            </div>
-        </div>
+    makeRequest(url){
+        fetchData(url, this.appID).then(this.insertData);
     }
 
     render(){
-        var feedState = this.props.feedState;
-        return feedState.length ?
-            <div className="cards">
-                {feedState.map(this.forEachItem)}
-            </div> :
-            <Loader/>
+        var dataImage = this.state.dataImage;
+        var dataComments = this.state.dataComments;
+        return <div className="image-page">
+            {Object.keys(dataImage).length ?  <ImageIP data={dataImage}/>:  <Loader/>}
+            {dataComments.length && <CommentsIP data={dataComments}/>}
+        </div>
+
+
     }
 }
 
-IGP = connect(mapStateToProps)(IGP);
-
-
-export default IGP;
+export default IP;

@@ -6,6 +6,7 @@ import Loader from './Loader.jsx';
 
 import store from './../store/store.js';
 import gotFeedData from './../actions/actionGotFeedData.js'
+import resetFeedData from './../actions/actionResetFeedData.js'
 
 
 const mapStateToProps = state => {return {feedState: state.feedState}};
@@ -18,15 +19,24 @@ class IGP extends Component {
         this.appID = '6273a7e9fad6e45';
         this.handleScroll = this.handleScroll.bind(this);
         this.makeRequest = this.makeRequest.bind(this);
+    }
 
+    determineURL(){
+        var feedLength = this.props.feedState.length;
+        var searchParams = this.props.params &&  this.props.params.searchParams;
+        var url = `https://api.imgur.com/3/gallery/t/polandball/viral/${feedLength ? (feedLength/60 + 1) : 0}`;
+        if(searchParams){
+            searchParams = searchParams.replace(/_/g, '+');
+            url = `https://api.imgur.com/3/gallery/search/?q=${searchParams}`;
+        }
+        return url;
     }
 
     makeRequest(){
         var self = this;
-        var feedLength = this.props.feedState.length;
+        var url = this.determineURL();
         if(this.sent){return;}
-        this.sent = true;
-        var url = `https://api.imgur.com/3/gallery/t/polandball/viral/${feedLength ? (feedLength/60 + 1) : 0}`;
+        this.sent = true;        
         fetchData(url, this.appID).then(response => {
             store.dispatch(gotFeedData(response));
             self.sent = false;
@@ -40,7 +50,14 @@ class IGP extends Component {
     }
 
     componentWillMount(){
-        this.makeRequest();
+        this.props.history.listen(function(){
+            store.dispatch(resetFeedData())
+        });
+        !this.props.feedState.length && this.makeRequest();
+    }
+
+    componentDidUpdate(){
+        !this.props.feedState.length && this.makeRequest();
     }
 
     componentDidMount() {
