@@ -3,9 +3,15 @@ import {Link} from 'react-router';
 
 
 class ImageIP extends Component {
+
+    forEachImage(image){ //case when in post not only one image
+        return <img key={image.id} src={image.link}/>
+    }
+
     render(){
         var data = this.props.data;
         var author = data && data['account_url'];
+        var images = data.images;
         return <div>
                 <div className="post-header">
                     <div className="post-title-container">
@@ -19,7 +25,7 @@ class ImageIP extends Component {
                     </div>
                 </div>
                 <div className="post-holder">
-                    <img src={data.link}/>
+                    {images ? images.map(this.forEachImage) : <img src={data.link}/>}
                 </div>
              </div>
     }
