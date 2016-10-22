@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Social from './Social.jsx';
 import {Link} from 'react-router';
 
 
@@ -27,6 +28,7 @@ class ImageIP extends Component {
                 <div className="post-holder">
                     {images ? images.map(this.forEachImage) : <img src={data.link}/>}
                 </div>
+                <Social data={data}/>
              </div>
     }
 }

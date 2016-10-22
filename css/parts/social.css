@@ -1,0 +1,42 @@
+.social{
+    margin: 15px 20px;
+}
+
+.social-icon {
+    border-radius: 54px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    margin-left: 10px;
+}
+
+.social-icon i{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    line-height: 27px;
+}
+
+.social-icon:first-child {
+    margin-left: 0;
+}
+
+.social-icon.icon-f {
+    background-color: #45619d;
+}
+
+.social-icon.icon-twttr {
+    background-color: #55acee;
+}
+
+.social-icon.icon-pin{
+    background-color: #db2b42;
+}
+
+.social-icon.icon-reddit {
+    background-color: #f54b00;
+}
