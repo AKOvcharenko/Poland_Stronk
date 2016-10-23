@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import fetchData from './../utils/fetchData.js';
 import Loader from './Loader.jsx';
 import Error from './../components/Error.jsx';
+import IGPHeader from './../components/IGPHeader.jsx';
 
 import store from './../store/store.js';
 import gotFeedData from './../actions/actionGotFeedData.js'
@@ -21,14 +22,19 @@ class IGP extends Component {
         this.sent = false; // same story, here i will keep flag for preventing request's doublings
         this.handleScroll = this.handleScroll.bind(this);
         this.makeRequest = this.makeRequest.bind(this);
+        this.determineResult = this.determineResult.bind(this);
     }
 
     determineURL(pageNumber){
         var searchParams = this.props.params &&  this.props.params.searchParams;
+        var author = this.props.params &&  this.props.params.author;
         var url = `https://api.imgur.com/3/gallery/t/polandball/viral/${pageNumber}`;
         if(searchParams){
             searchParams = searchParams.replace(/_/g, '+');
             url = `https://api.imgur.com/3/gallery/search/${pageNumber}/?q=${searchParams}`;
+        }
+        if(author){
+            url = `https://api.imgur.com/3/account/${author}/submissions/${pageNumber}`;
         }
         return url;
     }
@@ -94,15 +100,30 @@ class IGP extends Component {
             </div>
         </div>
     }
+
+    determineResult(feedState, haveAnyResponse, haveAnyImage){
+        var result = <Loader/>; // case when we have not got response yet
+        if(haveAnyResponse && haveAnyImage){// case when we received response with data
+            result = <div className="cards">{feedState.map(this.forEachItem)}</div>;
+        }
+        if(haveAnyResponse && !haveAnyImage){// case when we received response without data
+            result = <Error/>;
+        }
+
+        return result;
+    }
     
     render(){
         var feedState = this.props.feedState;
-        return feedState.length ?
-                (feedState[0] ? <div className="cards">
+        var anyResponse = !!feedState.length;
+        var anyImage = !!feedState[0];
+        var searchParams = this.props.params &&  this.props.params.searchParams;
+        var author = this.props.params &&  this.props.params.author;
+        return <div className="igp">
+                    <IGPHeader anyResponse={anyResponse} anyImage={anyImage} params={searchParams} author={author}/>
+                    {this.determineResult(feedState, anyResponse, anyImage)}
+                </div>
 
-                    {feedState.map(this.forEachItem)}
-                </div> : <Error/>)  :
-                <Loader/>
     }
 }
 

@@ -114,3 +114,16 @@
     color: #999;
     border-top: 1px solid #000;
 }
+
+.igp-header-wrapper{
+    display: block;
+    width: 970px;
+    margin: 15px auto;
+    color: white;
+    font-size: 25px;
+}
+
+.igp-header-wrapper .search-params{
+    font-size: 27px;
+    font-style: italic;
+}

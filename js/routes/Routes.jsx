@@ -10,9 +10,10 @@ var Routing = (
     <Router  history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRedirect to="/igp" />
-            <Route path="/igp" components={{igp: IGP, header: Header}} onEnter={function(){/*store.dispatch(resetFeedData())*/}}/>
+            <Route path="/igp" components={{igp: IGP, header: Header}}/>
             <Route path="/img/:imageId" components={{ip: IP, header: Header, social: Social}}/>
             <Route path="/search/:searchParams" components={{igp: IGP, header: Header}}/>
+            <Route path="/user/:author" components={{igp: IGP, header: Header}}/>
             <Route path="*" components={{error: Error, header: Header}}/>
         </Route>
     </Router>

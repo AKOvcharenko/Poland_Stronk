@@ -22,7 +22,7 @@ class CommentsIP extends Component {
 
     render(){
         var data = this.props.data;
-        return <div>
+        return <div className="ip-comments">
             {data.map(this.forEachComment)}
         </div>
     }

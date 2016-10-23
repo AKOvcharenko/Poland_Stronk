@@ -7,6 +7,8 @@
 
 .post-holder img{
     max-width: 920px;
+    display: block;
+    margin: 10px auto;
 }
 
 .post-header {
@@ -15,10 +17,6 @@
     background: #2c2f34;
     border-radius: 10px 10px 0 0;
     position: relative;
-}
-
-.post-title-container {
-    max-width: 530px;
 }
 
 .post-title {

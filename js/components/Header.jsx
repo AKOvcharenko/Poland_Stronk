@@ -25,11 +25,15 @@ class Header extends Component {
                         <Link className="navbar-brand" to="/igp">
                             <img alt="Brand" src="http://s.imgur.com/images/imgur-logo.svg?1"/>
                         </Link>
-                        <form onSubmit={this.onsubmit} className="navbar-form navbar-right">
-                            <div className="form-group">
+                        <form onSubmit={this.onsubmit} className="navbar-form navbar-right" role="search">
+                            <div className="input-group stylish-input-group">
                                 <input type="text" className="form-control" placeholder="Search"/>
+                                <span className="input-group-addon">
+                                    <button type="submit">
+                                        <span className="glyphicon glyphicon-search"/>
+                                    </button>
+                                </span>
                             </div>
-                            <button type="submit" className="btn btn-default"><span className="glyphicon glyphicon-search"></span></button>
                         </form>
                     </div>
                 </nav>

@@ -28,6 +28,16 @@ body, html{
 .navbar-brand{
     padding: 10px 15px;
 }
+
+.stylish-input-group .form-control{
+    border-right:0;
+    box-shadow:0 0 0;
+    border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
 .cards{
     padding: 25px;
     width: 970px;
@@ -144,6 +154,19 @@ body, html{
     color: #999;
     border-top: 1px solid #000;
 }
+
+.igp-header-wrapper{
+    display: block;
+    width: 970px;
+    margin: 15px auto;
+    color: white;
+    font-size: 25px;
+}
+
+.igp-header-wrapper .search-params{
+    font-size: 27px;
+    font-style: italic;
+}
 .image-page{
     width: 970px;
     background-color: #2C2F34;
@@ -153,6 +176,8 @@ body, html{
 
 .post-holder img{
     max-width: 920px;
+    display: block;
+    margin: 10px auto;
 }
 
 .post-header {
@@ -161,10 +186,6 @@ body, html{
     background: #2c2f34;
     border-radius: 10px 10px 0 0;
     position: relative;
-}
-
-.post-title-container {
-    max-width: 530px;
 }
 
 .post-title {

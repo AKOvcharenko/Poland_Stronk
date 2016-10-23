@@ -13,7 +13,7 @@ class ImageIP extends Component {
         var data = this.props.data;
         var author = data && data['account_url'];
         var images = data.images;
-        return <div>
+        return <div className="ip-image">
                 <div className="post-header">
                     <div className="post-title-container">
                         <h1 className="post-title">{data.title}</h1>
