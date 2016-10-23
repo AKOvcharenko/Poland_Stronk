@@ -37,7 +37,7 @@ class IP extends Component {
         var dataComments = this.state.dataComments;
         return <div className="image-page">
             {Object.keys(dataImage).length ?  <ImageIP data={dataImage}/>:  <Loader/>}
-            {dataComments.length && <CommentsIP data={dataComments}/>}
+            {dataComments.length && <CommentsIP data={dataComments}/> || null}
         </div>
 
 

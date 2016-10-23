@@ -1,7 +1,7 @@
 .image-page{
     width: 970px;
     background-color: #2C2F34;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
     border-radius: 10px;
 }
 
@@ -47,7 +47,7 @@
 
 .comment-wrapper{
     color: white;
-    margin: 20px;
+    margin: 0 20px 20px;
     padding: 5px 20px;
     border: 1px solid black;
     border-radius: 5px;
@@ -71,4 +71,18 @@
 
 .points{
     font-size: 11px;
+}
+
+.ip-image,
+.ip-comments{
+    overflow: hidden;
+}
+
+.image-stats{
+    color: #fff;
+    margin: 0 0 15px 25px;
+}
+
+.post-action-stats-points{
+    margin-right: 20px;
 }

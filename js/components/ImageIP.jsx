@@ -22,13 +22,15 @@ class ImageIP extends Component {
                         <span> by </span>
                         {!author && <Link to="/anonymous" title={`view account of Anonymous`} className="post-account">Anonymous</Link>}
                         {author && <Link to={`/user/${author}`} title={`view account of ${author}`} className="post-account">{author}</Link>}
-                        <span title="Wed Oct 19 2016 22:43:44 GMT+0200 (Central European Daylight Time)">20h</span>
                     </div>
                 </div>
                 <div className="post-holder">
                     {images ? images.map(this.forEachImage) : <img src={data.link}/>}
                 </div>
                 <Social data={data}/>
+                <div className="image-stats">
+                    <span className="post-action-stats pointer"><span className="post-action-stats-points">{data.points} Point</span><span>{data.views} Views</span></span>
+                </div>
              </div>
     }
 }
