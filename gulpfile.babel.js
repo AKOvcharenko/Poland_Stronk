@@ -4,6 +4,8 @@ import watchify from 'watchify';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
+import uglify from 'gulp-uglify';
+import buffer from 'vinyl-buffer';
 
 gulp.task('buildJS', () => {
     const bundler = watchify(browserify({entries: './js/app.jsx', extensions: ['.jsx'], debug: true}));
@@ -17,6 +19,8 @@ gulp.task('buildJS', () => {
                     console.error(err);
                 })
                 .pipe(source('app.js'))
+                .pipe(buffer())
+                .pipe(uglify())
                 .pipe(gulp.dest('./'));
     };
 

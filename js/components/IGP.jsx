@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import fetchData from './../utils/fetchData.js';
 import Loader from './Loader.jsx';
@@ -15,20 +15,21 @@ const mapStateToProps = state => {return {feedState: state.feedState}};
 
 class IGP extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.appID = '6273a7e9fad6e45';
         this.pageNumber = 0; // i will count number of pages to which i already have sent request, yes it is a big memory leak
         this.sent = false; // same story, here i will keep flag for preventing request's doublings
         this.handleScroll = this.handleScroll.bind(this);
         this.makeRequest = this.makeRequest.bind(this);
         this.determineResult = this.determineResult.bind(this);
+        this.resetFeed = this.resetFeed.bind(this);
     }
 
     determineURL(pageNumber){
         var searchParams = this.props.params &&  this.props.params.searchParams;
         var author = this.props.params &&  this.props.params.author;
-        var url = `https://api.imgur.com/3/gallery/t/polandball/viral/${pageNumber}`;
+        var url = `https://api.imgur.com/3/gallery/t/polandball/time/${pageNumber}`;
         if(searchParams){
             searchParams = searchParams.replace(/_/g, '+');
             url = `https://api.imgur.com/3/gallery/search/${pageNumber}/?q=${searchParams}`;
@@ -48,22 +49,24 @@ class IGP extends Component {
             store.dispatch(gotFeedData(response));
             self.sent = false;
             self.pageNumber = this.pageNumber + 1;
-        }, err => {self.sent = false; self.pageNumber = self.pageNumber + 1});
+        }, () => {self.sent = false; self.pageNumber = self.pageNumber + 1});
     }
 
     handleScroll(){
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if ((window.innerHeight + scrollTop) >= document.body.offsetHeight) {
             this.makeRequest();
         }
     }
 
+    resetFeed(){
+        this.pageNumber = 0;
+        store.dispatch(resetFeedData());
+    }
+
     componentWillMount(){
-        var self = this;
-        this.props.history.listen(() => {
-            //debugger;
-            self.pageNumber = 0;
-            store.dispatch(resetFeedData());
-        });
+        this.props.router.listen(this.resetFeed);
+        this.resetFeed();
         !this.props.feedState.length && this.makeRequest();
     }
 
@@ -79,7 +82,7 @@ class IGP extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
     
-    forEachItem(item, index){
+    forEachItem(item){
         return <div key={item.id} id={item.id} className="post" >
             <Link className="image-list-link" to={`img/${item.id}`}>
                 <img src={`http://i.imgur.com/${item.cover || item.id}b.jpg`}/>
@@ -120,4 +123,4 @@ class IGP extends Component {
 IGP = connect(mapStateToProps)(IGP);
 
 
-export default IGP;
+export default withRouter(IGP) ;

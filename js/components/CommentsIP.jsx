@@ -12,7 +12,7 @@ class CommentsIP extends Component {
     forEachComment(comment, index){
         return <div className="comment" key={comment.id}>
                     <div className="comment-wrapper">
-                        <Link to={`/author/${comment['author']}`}><span className="author">{comment.author}</span></Link>
+                        <Link to={`/user/${comment['author']}`}><span className="author">{comment.author}</span></Link>
                         <span className="points">{comment.points + (comment.points === 1 ? ' pt' : ' pts')}</span>
                         <p className="comment-text">{comment['comment']}</p>
                     </div>

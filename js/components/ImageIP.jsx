@@ -29,7 +29,7 @@ class ImageIP extends Component {
                 </div>
                 <Social data={data}/>
                 <div className="image-stats">
-                    <span className="post-action-stats pointer"><span className="post-action-stats-points">{data.points} Point</span><span>{data.views} Views</span></span>
+                    <span className="post-action-stats pointer"><span className="post-action-stats-points">{data.points} Points</span><span>{data.views} Views</span></span>
                 </div>
              </div>
     }
