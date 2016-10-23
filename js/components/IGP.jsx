@@ -83,16 +83,6 @@ class IGP extends Component {
         return <div key={item.id} id={item.id} className="post" >
             <Link className="image-list-link" to={`img/${item.id}`}>
                 <img src={`http://i.imgur.com/${item.cover || item.id}b.jpg`}/>
-                    <div className="point-info gradient-transparent-black transition">
-                        <div className="relative">
-                            <div className="pa-bottom">
-                                <div className="point-info-points" title="points">
-                                    <span className={'points-' + item.id}></span>
-                                    <span className={'points-text-'+ item.id}>points</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
             </Link>
             <div className="hover">
                 <p>{item.title}</p>

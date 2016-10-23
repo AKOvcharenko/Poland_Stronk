@@ -39,8 +39,8 @@ body, html{
     background:transparent;
 }
 .cards{
-    padding: 25px;
-    width: 970px;
+    padding: 10px;
+    width: 972px;
     background-color: #2C2F34;
     margin: 0 auto;
     border-radius: 10px;
@@ -57,17 +57,18 @@ body, html{
     position: relative;
 }
 
+.post{
+    margin-right: 10px;
+}
+
+.post:nth-child(5n){
+    margin-right: 2px;
+}
 
 .post, .post img {
     width: 180px;
     height: 180px;
     line-height: 0;
-}
-
-.post .hover, .post a.image-list-link {
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .post img {
@@ -124,11 +125,14 @@ body, html{
     -moz-box-shadow: 0 2px 5px #000;
     box-shadow: 0 2px 5px #000;
     text-align: left;
+    left: 10%;
 }
 .post .hover, .post a.image-list-link {
     position: absolute;
-    top: 0;
-    left: 0;
+}
+
+.post:hover > .hover{
+    display:  block;
 }
 .post, .post .hover {
     border: 2px solid #444442;
@@ -148,7 +152,6 @@ body, html{
     background-color: #232323;
     padding: 7%;
     position: absolute;
-    width: 87.5%;
     bottom: 0;
     left: 0;
     color: #999;
@@ -163,7 +166,8 @@ body, html{
     font-size: 25px;
 }
 
-.igp-header-wrapper .search-params{
+.igp-header-wrapper .search-params,
+.igp-header-wrapper .header-author{
     font-size: 27px;
     font-style: italic;
 }
