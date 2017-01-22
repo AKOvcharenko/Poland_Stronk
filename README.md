@@ -1,4 +1,4 @@
-# Poland_Stronk
+# Poland Stronk
 
 Simple React + Redux App based on imgur api for browsing funny memes about countryballs
 
